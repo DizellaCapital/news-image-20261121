@@ -203,13 +203,111 @@ def scene_warsaw(draw, x, y, w, h):
     draw.polygon([(x + 92, y + 32), (x + 104, y + 44), (x + 112, y + 32)], fill=(22, 35, 63))
 
 
-def scene_denmark(draw, x, y, w, h):
-    draw.rectangle([x, y, x + w, y + h], fill=(200, 16, 46))
-    draw.rectangle([x + 58, y, x + 74, y + h], fill=(255, 255, 255))
-    draw.rectangle([x, y + 19, x + w, y + 33], fill=(255, 255, 255))
-    draw.ellipse([x + 148, y + 12, x + 172, y + 36], outline=(255, 255, 255), width=3)
-    draw.line([x + 154, y + 18, x + 166, y + 30], fill=(255, 255, 255), width=3)
-    draw.line([x + 166, y + 18, x + 154, y + 30], fill=(255, 255, 255), width=3)
+def scene_quake(draw, x, y, w, h):
+    draw.rectangle([x, y, x + w, y + h], fill=(233, 224, 200))
+    # mountains
+    draw.polygon([(x + 6, y + h), (x + 60, y + 8), (x + 104, y + h)], fill=(122, 94, 66))
+    draw.polygon([(x + 70, y + h), (x + 130, y + 2), (x + 182, y + h)], fill=(96, 74, 52))
+    draw.polygon([(x + 52, y + 16), (x + 60, y + 8), (x + 68, y + 16)], fill=(255, 255, 255))
+    draw.polygon([(x + 122, y + 10), (x + 130, y + 2), (x + 138, y + 10)], fill=(255, 255, 255))
+    # seismograph zigzag
+    pts = [(x + 8, y + 34), (x + 22, y + 34), (x + 28, y + 22), (x + 36, y + 44),
+           (x + 44, y + 18), (x + 52, y + 46), (x + 60, y + 26), (x + 68, y + 40),
+           (x + 78, y + 30), (x + 92, y + 36), (x + 106, y + 30), (x + 120, y + 42),
+           (x + 132, y + 30), (x + 146, y + 36), (x + 160, y + 30), (x + 180, y + 34)]
+    draw.line(pts, fill=(200, 30, 30), width=3)
+    # small house
+    draw.rectangle([x + 150, y + 38, x + 172, y + 50], fill=(176, 141, 79))
+    draw.polygon([(x + 148, y + 38), (x + 161, y + 28), (x + 174, y + 38)],
+                 fill=(166, 28, 28))
+
+
+def scene_davao(draw, x, y, w, h):
+    draw.rectangle([x, y, x + w, y + h], fill=(168, 205, 232))
+    draw.ellipse([x + 160, y + 4, x + 178, y + 22], fill=(255, 244, 200))
+    # runway
+    draw.rectangle([x, y + 40, x + w, y + h], fill=(60, 60, 60))
+    for dx in range(8, 180, 24):
+        draw.rectangle([x + dx, y + 45, x + dx + 12, y + 47], fill=(255, 255, 255))
+    # plane side profile, nose right, on the runway
+    draw.polygon([(x + 40, y + 26), (x + 140, y + 26), (x + 154, y + 30),
+                  (x + 140, y + 34), (x + 40, y + 34)], fill=(255, 255, 255))
+    draw.polygon([(x + 48, y + 26), (x + 58, y + 12), (x + 66, y + 26)], fill=(255, 255, 255))
+    draw.polygon([(x + 78, y + 34), (x + 92, y + 44), (x + 100, y + 34)], fill=(255, 255, 255))
+    draw.polygon([(x + 128, y + 30), (x + 146, y + 30), (x + 146, y + 38),
+                  (x + 132, y + 38)], fill=(200, 30, 30))
+    for wx in (56, 76, 96, 116):
+        draw.rectangle([x + wx, y + 29, x + wx + 8, y + 32], fill=(43, 88, 164))
+
+
+def scene_boat(draw, x, y, w, h):
+    draw.rectangle([x, y, x + w, y + h], fill=(27, 90, 140))
+    # waves
+    for wy in (10, 26, 42):
+        for wx in range(4, 184, 16):
+            draw.arc([x + wx, y + wy, x + wx + 14, y + wy + 10], 180, 360,
+                     fill=(255, 255, 255), width=2)
+    # capsized hull, keel up
+    draw.pieslice([x + 56, y + 8, x + 132, y + 44], 0, 180, fill=(122, 84, 40))
+    draw.rectangle([x + 56, y + 24, x + 132, y + 30], fill=(90, 60, 28))
+    # people in the water
+    for px, py in [(40, 34), (150, 38), (160, 28)]:
+        draw.ellipse([x + px, y + py, x + px + 8, y + py + 8], fill=(255, 200, 150))
+    # rescue ring
+    draw.ellipse([x + 18, y + 16, x + 34, y + 32], outline=(255, 255, 255), width=3)
+
+
+def scene_rahul(draw, x, y, w, h):
+    draw.rectangle([x, y, x + w, y + h], fill=(46, 125, 50))
+    draw.rectangle([x + 70, y, x + 118, y + h], fill=(210, 180, 140))   # pitch
+    # stumps
+    for sx in (86, 94, 102):
+        draw.line([x + sx, y + 8, x + sx, y + 22], fill=(255, 255, 255), width=3)
+    draw.line([x + 86, y + 8, x + 102, y + 8], fill=(255, 255, 255), width=2)
+    # bat
+    draw.polygon([(x + 128, y + 14), (x + 140, y + 14), (x + 136, y + 40),
+                  (x + 126, y + 40)], fill=(176, 141, 79))
+    draw.line([x + 132, y + 40, x + 138, y + 50], fill=(176, 141, 79), width=4)
+    # red ball + motion dots
+    draw.ellipse([x + 152, y + 30, x + 162, y + 40], fill=(200, 30, 30))
+    for dx in (168, 174):
+        draw.ellipse([x + dx, y + 33, x + dx + 3, y + 36], fill=(255, 255, 255))
+    draw.text((x + 10, y + 34), "124*", font=SANS_B(16), fill=(255, 255, 255))
+
+
+def scene_trump(draw, x, y, w, h):
+    # US flag, left half
+    for i in range(7):
+        draw.rectangle([x, y + i * 8, x + 92, y + i * 8 + 8],
+                       fill=(178, 34, 52) if i % 2 == 0 else (255, 255, 255))
+    draw.rectangle([x, y, x + 40, y + 28], fill=(43, 88, 164))
+    for sx in (8, 20, 32):
+        for sy in (6, 16):
+            draw.ellipse([x + sx, y + sy, x + sx + 3, y + sy + 3], fill=(255, 255, 255))
+    # Russian tricolor, right half
+    draw.rectangle([x + 96, y, x + w, y + 18], fill=(255, 255, 255))
+    draw.rectangle([x + 96, y + 18, x + w, y + 35], fill=(43, 88, 164))
+    draw.rectangle([x + 96, y + 35, x + w, y + h], fill=(200, 30, 30))
+    # handshake star between the flags
+    starburst(draw, x + 94, y + 26, 8, (255, 215, 94))
+
+
+def scene_youth(draw, x, y, w, h):
+    draw.rectangle([x, y, x + w, y + h], fill=(246, 240, 224))
+    # crowd of heads + placards
+    heads = [(16, 34, (200, 30, 30)), (44, 30, (43, 88, 164)), (72, 36, (30, 132, 73)),
+             (100, 30, (212, 175, 55)), (128, 34, (166, 28, 28)), (156, 30, (108, 52, 131))]
+    for hx, hy, c in heads:
+        draw.ellipse([x + hx, y + hy, x + hx + 12, y + hy + 12], fill=c)
+        draw.rectangle([x + hx + 1, y + hy + 12, x + hx + 11, y + h], fill=c)
+    # placards on sticks
+    for px, py, c in [(26, 6, (200, 30, 30)), (82, 4, (43, 88, 164)),
+                      (138, 6, (30, 132, 73))]:
+        draw.line([x + px + 10, y + py + 12, x + px + 10, y + 30], fill=(60, 60, 60), width=2)
+        draw.rectangle([x + px, y + py, x + px + 34, y + py + 14], fill=(255, 255, 255),
+                       outline=c, width=2)
+        draw.line([x + px + 5, y + py + 5, x + px + 29, y + py + 5], fill=c, width=2)
+        draw.line([x + px + 5, y + py + 9, x + px + 29, y + py + 9], fill=c, width=2)
 
 
 def scene_chips(draw, x, y, w, h):
@@ -226,74 +324,6 @@ def scene_chips(draw, x, y, w, h):
     draw.polygon([(x + 156, y + 21), (x + 166, y + 26), (x + 156, y + 31)], fill=(255, 255, 255))
     draw.rectangle([x + 168, y + 8, x + 184, y + 20], fill=(222, 41, 16))
     draw.text((x + 171, y + 10), "*", font=SANS_B(9), fill=(255, 215, 0))
-
-
-def scene_h5n1(draw, x, y, w, h):
-    draw.rectangle([x, y, x + w, y + h], fill=(213, 232, 208))
-    draw.ellipse([x + 30, y + 22, x + 96, y + 46], fill=(146, 94, 46))       # body
-    draw.ellipse([x + 88, y + 10, x + 108, y + 30], fill=(146, 94, 46))      # head
-    draw.polygon([(x + 92, y + 11), (x + 96, y + 2), (x + 101, y + 11)], fill=(200, 30, 30))
-    draw.ellipse([x + 99, y + 16, x + 103, y + 20], fill=(10, 10, 10))      # eye
-    draw.polygon([(x + 108, y + 16), (x + 118, y + 20), (x + 108, y + 24)], fill=(255, 140, 26))
-    draw.line([x + 34, y + 26, x + 22, y + 16], fill=(120, 72, 30), width=3)
-    draw.line([x + 36, y + 30, x + 24, y + 30], fill=(120, 72, 30), width=3)
-    draw.rectangle([x + 146, y + 12, x + 162, y + 42], fill=(255, 255, 255),
-                   outline=(120, 120, 120))
-    draw.rectangle([x + 149, y + 8, x + 159, y + 12], fill=(43, 88, 164))
-    draw.line([x + 154, y + 20, x + 154, y + 32], fill=(34, 197, 94), width=3)
-    draw.line([x + 148, y + 26, x + 160, y + 26], fill=(34, 197, 94), width=3)
-
-
-def scene_nvidia(draw, x, y, w, h):
-    draw.rectangle([x, y, x + w, y + h], fill=(11, 61, 30))
-    draw.rectangle([x + 18, y + 10, x + 66, y + 42], fill=(34, 197, 94))
-    draw.rectangle([x + 30, y + 20, x + 54, y + 32], fill=(11, 61, 30))
-    draw.ellipse([x + 36, y + 22, x + 48, y + 30], fill=(34, 197, 94))
-    draw.rectangle([x + 96, y + 8, x + 150, y + 44], fill=(255, 255, 255))
-    for ly in (16, 24, 32):
-        draw.line([x + 104, y + ly, x + 142, y + ly], fill=(150, 150, 150), width=2)
-    draw.ellipse([x + 138, y + 34, x + 154, y + 50], fill=RED)
-    draw.ellipse([x + 138, y + 34, x + 154, y + 50], outline=(255, 255, 255), width=1)
-
-
-def scene_icj(draw, x, y, w, h):
-    draw.rectangle([x, y, x + w, y + h], fill=(27, 47, 82))
-    draw.line([x + 94, y + 8, x + 94, y + 46], fill=GOLD, width=3)
-    draw.line([x + 60, y + 12, x + 128, y + 12], fill=GOLD, width=3)
-    draw.line([x + 78, y + 46, x + 110, y + 46], fill=GOLD, width=3)
-    for cx in (64, 124):
-        draw.line([x + cx, y + 12, x + cx, y + 28], fill=GOLD, width=2)
-        draw.polygon([(x + cx - 12, y + 28), (x + cx + 12, y + 28), (x + cx, y + 38)],
-                     outline=GOLD, width=2)
-    draw.ellipse([x + 88, y + 4, x + 100, y + 12], fill=GOLD)
-
-
-def scene_himars(draw, x, y, w, h):
-    draw.rectangle([x, y, x + w, y + h], fill=(74, 93, 35))
-    draw.rectangle([x + 16, y + 28, x + 96, y + 42], fill=(40, 56, 20))     # truck
-    draw.rectangle([x + 84, y + 20, x + 96, y + 28], fill=(40, 56, 20))     # cab
-    for wx in (28, 52, 76, 90):
-        draw.ellipse([x + wx, y + 40, x + wx + 10, y + 50], fill=(10, 10, 10))
-    draw.line([x + 30, y + 26, x + 66, y + 8], fill=(30, 42, 14), width=6)
-    draw.line([x + 34, y + 30, x + 70, y + 12], fill=(30, 42, 14), width=6)
-    dotted_arc(draw, (x + 66, y + 10), (x + 110, y - 6), (x + 140, y + 2),
-               (255, 140, 26), step=0.08)
-    starburst(draw, x + 142, y + 4, 8, (255, 140, 26))
-    starburst(draw, x + 142, y + 4, 4, (255, 215, 94))
-    dotted_arc(draw, (x + 70, y + 14), (x + 120, y + 2), (x + 158, y + 12),
-               (255, 140, 26), step=0.08)
-    starburst(draw, x + 160, y + 14, 7, (255, 140, 26))
-
-
-def scene_cyber(draw, x, y, w, h):
-    draw.rectangle([x, y, x + w, y + h], fill=(10, 10, 18))
-    for gx in range(10, 180, 14):
-        for gy in range(6, 48, 12):
-            if (gx * 3 + gy * 7) % 11 < 6:
-                draw.ellipse([x + gx, y + gy, x + gx + 3, y + gy + 3], fill=(34, 197, 94))
-    draw.polygon([(x + 82, y + 6), (x + 108, y + 6), (x + 108, y + 28),
-                  (x + 95, y + 44), (x + 82, y + 28)], outline=(220, 40, 40), width=3)
-    draw.text((x + 88, y + 16), "UK", font=SANS_B(13), fill=(255, 255, 255))
 
 
 def scene_vegas(draw, x, y, w, h):
@@ -378,15 +408,15 @@ PINS = [
     (1, 30.7, 36.9, 12, -12),    # Antalya
     (2, 33.4, 47.9, 14, 10),     # Kryvyi Rih
     (3, 46.7, 24.7, 12, 8),      # Riyadh
-    (5, 21.0, 52.2, -16, -12),   # Warsaw
-    (6, 12.6, 55.7, 8, -14),     # Copenhagen
-    (7, -77.0, 38.9, -10, 12),   # Washington
-    (8, 77.2, 28.6, 12, 6),      # New Delhi
-    (9, -122.0, 37.5, -8, -12),  # California
-    (10, 4.3, 52.1, 16, -10),    # The Hague
-    (11, 34.8, 50.9, 14, -10),   # Sumy
-    (12, -0.1, 51.5, -16, 8),    # London
-    (13, -115.1, 36.2, -10, 12),  # Las Vegas
+    (4, -75.2, -11.2, 12, -10),  # Junin, Peru
+    (6, 21.0, 52.2, -16, -12),   # Warsaw
+    (7, 125.6, 7.1, 12, 6),      # Davao
+    (8, 6.2, 4.9, -12, 10),      # Bayelsa, Nigeria
+    (9, 174.8, -41.3, 12, -12),  # Wellington
+    (10, -115.1, 36.2, -10, 12), # Las Vegas
+    (11, -77.0, 38.9, -12, -12), # Washington (Trump-Putin)
+    (12, 13.4, 52.5, 10, -14),   # Berlin (youth march)
+    (13, -77.0, 38.9, 14, 10),   # Washington (AI chips)
 ]
 
 
@@ -413,46 +443,46 @@ HEROES = [
 ]
 
 VIGNETTES = [
-    dict(n=4, scene=scene_mercury, tag="MERCURY · SPACE · ESA",
+    dict(n=4, scene=scene_quake, tag="JUNÍN, PERU · QUAKE · USGS",
+         head="Magnitude 6.7 quake hits Peru",
+         body="Struck at 00:09 UTC, 108 km deep; felt in Lima, no deaths reported.",
+         src="USGS · IGP"),
+    dict(n=5, scene=scene_mercury, tag="MERCURY · SPACE · ESA",
          head="BepiColombo reaches Mercury after eight years",
          body="Fires thrusters at 19:24 CET to be caught by Mercury's gravity.",
          src="ESA"),
-    dict(n=5, scene=scene_warsaw, tag="WARSAW, POLAND · NATO · AP",
+    dict(n=6, scene=scene_warsaw, tag="WARSAW, POLAND · NATO · AP",
          head="Rutte in Warsaw as Poland seeks NATO help",
          body="NATO chief visits after Friday's landings; Warsaw wants more support.",
          src="AP"),
-    dict(n=6, scene=scene_denmark, tag="COPENHAGEN · SECURITY · Reports",
-         head="Denmark charges two over Russian murder plot",
-         body="Two Danes accused of a Russian plot to kill a Ukrainian rapper.",
-         src="Reports"),
-    dict(n=7, scene=scene_chips, tag="WASHINGTON · TECH · House panel",
+    dict(n=7, scene=scene_davao, tag="DAVAO · AVIATION · CAAP",
+         head="Jet lands safely; all 146 safe",
+         body="Air Niugini 767 diverts after engine fire warning; no injuries.",
+         src="CAAP · AP"),
+    dict(n=8, scene=scene_boat, tag="BAYELSA · DISASTER · Police",
+         head="Funeral boat capsizes; four dead",
+         body="Police confirm four dead, 24 rescued; search for more goes on.",
+         src="Police · Reuters"),
+    dict(n=9, scene=scene_rahul, tag="WELLINGTON · CRICKET · AFP",
+         head="Rahul hits century as India fight back",
+         body="Unbeaten 124 at tea; India 344 for 2, replying to 368.",
+         src="AFP · Scorecard"),
+    dict(n=10, scene=scene_vegas, tag="LAS VEGAS · FORMULA 1 · F1",
+         head="Russell fastest in final practice",
+         body="1:34.041 in the last dry session; clashes with Verstappen.",
+         src="F1 · Reuters"),
+    dict(n=11, scene=scene_trump, tag="WASHINGTON · TALKS · Reuters",
+         head="Trump upbeat on Putin talks",
+         body="Sees a 'real good chance' of a Ukraine deal after talks in China.",
+         src="Reuters"),
+    dict(n=12, scene=scene_youth, tag="EUROPE · PROTEST · AFP",
+         head="Youth march across Europe",
+         body="Rallies in about 400 cities over living costs and rearmament.",
+         src="AFP"),
+    dict(n=13, scene=scene_chips, tag="WASHINGTON · TECH · House panel",
          head="US clears ~900,000 AI chips for China",
          body="Washington approved the sale of close to 900,000 AI chips to China.",
          src="House panel"),
-    dict(n=8, scene=scene_h5n1, tag="NEW DELHI · HEALTH · PIB",
-         head="India launches first H5N1 vaccine",
-         body="A home-made vaccine for chickens, the first of its kind.",
-         src="PIB"),
-    dict(n=9, scene=scene_nvidia, tag="CALIFORNIA · TECH · Reuters",
-         head="California subpoenas Nvidia",
-         body="Attorney general probes the ex-CEO's exit and China ties.",
-         src="Reuters"),
-    dict(n=10, scene=scene_icj, tag="THE HAGUE · JUSTICE · Reuters",
-         head="Myanmar, China call ICJ ruling 'unjust'",
-         body="Both reject the court's first genocide verdict; Switzerland hails it.",
-         src="Reuters"),
-    dict(n=11, scene=scene_himars, tag="SUMY · WAR · Reports",
-         head="HIMARS wipes out 20 Russian commanders",
-         body="A strike destroys the 810th brigade's command post in Sumy.",
-         src="Reports"),
-    dict(n=12, scene=scene_cyber, tag="LONDON · SECURITY · UK",
-         head="Britain hits Moscow with cyberattacks",
-         body="A UK military official says cyber operations ran against Russia.",
-         src="UK"),
-    dict(n=13, scene=scene_vegas, tag="LAS VEGAS · FORMULA 1 · F1",
-         head="Las Vegas GP qualifying today",
-         body="The grid is decided under the lights; the race runs on Sunday.",
-         src="F1"),
 ]
 
 # (number, city, one-line brief) — 14..40
@@ -464,26 +494,26 @@ BRIEFS = [
     (18, "TOKYO", "Frosty APEC greeting for Takaichi."),
     (19, "OTTAWA", "World can no longer count on US leadership."),
     (20, "JOHANNESBURG", "ANC scrambles after worst result since 1994."),
-    (21, "LIMA", "Magnitude 6.8 quake strikes central Peru."),
+    (21, "COPENHAGEN", "Denmark charges two over Russian murder plot."),
     (22, "MEXICO", "Caravan of about 300 migrants crosses in."),
     (23, "BRUSSELS", "Rare EU-UK summit; Burnham seeks Brexit fix."),
-    (24, "TOKYO", "China warns on climbing Mount Fuji."),
+    (24, "PODGORICA", "Montenegro rejects land deal with Croatia."),
     (25, "KABUL", "UN warns ISIS-K is gaining drones."),
-    (26, "BERLIN", "Students march against rearmament."),
+    (26, "NEW DELHI", "India launches first H5N1 vaccine."),
     (27, "WASHINGTON", "Second judge blocks Trump's triumphal arch."),
     (28, "BRASILIA", "Indigenous land bill advances; Raoni visit."),
     (29, "BAGHDAD", "Pipeline chief arrested over illicit oil trade."),
     (30, "HORMUZ", "Iran claims waters 500 km beyond strait."),
-    (31, "MUMBAI", "IndiGo ends ex-CEO Kathpalia's job."),
+    (31, "CALIFORNIA", "California subpoenas Nvidia."),
     (32, "WASHINGTON", "US floats NATO membership for Ukraine."),
-    (33, "PODGORICA", "Montenegro rejects land deal with Croatia."),
+    (33, "THE HAGUE", "Myanmar, China call ICJ ruling 'unjust'."),
     (34, "ODISHA", "After Akvan: relief under way; no deaths."),
     (35, "MELBOURNE", "Australia v England open T20 series tonight."),
-    (36, "WELLINGTON", "India resume on 159/1 on day three."),
+    (36, "SUMY", "HIMARS wipes out 20 Russian commanders."),
     (37, "PERTH", "Starc takes 7/58 as Ashes opens; England 172."),
     (38, "TURIN", "Medvedev meets Zverev in tonight's semi."),
     (39, "WASHINGTON", "Pentagon: US Iran engagement cost $48.3bn."),
-    (40, "UN", "Yearbook: 44 of 96 climate indicators improving."),
+    (40, "LONDON", "Britain hits Moscow with cyberattacks."),
 ]
 
 STATS = [
@@ -491,18 +521,18 @@ STATS = [
     ("12", "killed in Ukraine strikes in a day"),
     ("42", "injured in the Kryvyi Rih strike"),
     ("3", "missiles downed over Riyadh"),
-    ("8 yrs", "BepiColombo's voyage to Mercury"),
-    ("92,000", "people at COP31, the largest ever"),
+    ("6.7", "Peru quake magnitude"),
+    ("146", "safe after Davao jet landing"),
 ]
 
 REGIONS = [
-    ("EUROPE", 10, (31, 78, 121)),
-    ("ASIA", 8, (176, 58, 46)),
+    ("EUROPE", 11, (31, 78, 121)),
+    ("ASIA", 6, (176, 58, 46)),
     ("MIDDLE EAST", 3, (183, 149, 11)),
-    ("AFRICA", 1, (30, 132, 73)),
-    ("AMERICAS", 13, (108, 52, 131)),
+    ("AFRICA", 2, (30, 132, 73)),
+    ("AMERICAS", 14, (108, 52, 131)),
     ("OCEANIA", 3, (17, 122, 101)),
-    ("GLOBAL", 2, (93, 109, 126)),
+    ("GLOBAL", 1, (93, 109, 126)),
 ]
 
 DATE_CHECK = (
@@ -559,9 +589,9 @@ def render():
     title = "Saturday 21 November 2026"
     tf = SERIF_B(50)
     d.text(((W - text_w(d, title, tf)) / 2, 36), title, font=tf, fill=INK)
-    sub = "Riyadh intercepts three missiles · COP31 into overtime · BepiColombo at Mercury · Rutte in Warsaw"
-    sf = SERIF_I
-    d.text(((W - text_w(d, sub, sf)) / 2, 92), sub, font=sf, fill=INK)
+    sub = "Climate summit runs past its deadline · Five missiles shot down over Saudi Arabia · Strong quake shakes Peru"
+    sf = SERIF_B(16)
+    d.text(((W - text_w(d, sub, sf)) / 2, 94), sub, font=sf, fill=RED)
     d.line([MX, 112, W - MX, 112], fill=INK, width=1)
 
     # ---- stat strip: 6 big numbers
@@ -676,7 +706,7 @@ def render():
                   outline=(255, 255, 255), width=1)
         tw = text_w(d, str(n), pin_font)
         d.text((bx - tw / 2, by - 4.5), str(n), font=pin_font, fill=(255, 255, 255))
-    note = "Pins 1–13 mark the drawn stories. No. 4 is in space: Mercury."
+    note = "Pins 1–13 mark the drawn stories. No. 5 is in space: Mercury."
     d.text((map_x + 6, map_y + map_h - 12), note, font=SANS(8.5), fill=GREY)
 
     # briefs: two columns, rows sized by the taller side
