@@ -2,55 +2,34 @@
 [![rank](https://make.fun/badge/news-image-20261121/DizellaCapital/news-image-20261121/rank.svg)](https://make.fun/bounty/news-image-20261121/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261121)
 [![reward](https://make.fun/badge/news-image-20261121/DizellaCapital/news-image-20261121/reward.svg)](https://make.fun/bounty/news-image-20261121?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261121)
 
-# Saturday 21 November 2026 — The World in One Day
+# THE SATURDAY LEDGER — Saturday 21 November 2026
 
-[![Bounty: news-image-20261121](https://make.fun/c/news-image-20261121)](https://make.fun/c/news-image-20261121)
-[![Enter via referral qxacafna](https://make.fun/r/qxacafna)](https://make.fun/r/qxacafna)
-[![make.fun](https://make.fun)](https://make.fun)
+A one-page broadsheet front page for 21 November 2026: **36 dated stories,
+7 regions, 13 illustrated cards** — COP31 overtime, Riyadh intercepts, Peru
+M6.7 quake, BepiColombo at Mercury, the Davao jet, Rutte in Warsaw, Ethiopia
+displacement, and more. Warm newsprint, serif headlines, a "21 Nov by the
+numbers" strip, a dotted world map with numbered pins for stories 1–13, and
+a date-check footer that names the big Friday stories deliberately left out.
 
-One image that sums up the world's news of **Saturday 21 November 2026**:
-40 sourced stories, 7 regions, every one dated — COP31 into overtime with no
-deal, Russian strikes kill 12 in Ukraine, three Houthi missiles downed over
-Riyadh, BepiColombo reaches Mercury after eight years, Rutte in Warsaw.
+## How it is built
 
-## The entry
-
-- `entry.png` — the front page, 1024×1024, drawn in code (see `render.py`).
-  Classic newspaper grammar: cream serif masthead, a stat strip of the day's
-  six biggest numbers under the masthead, a region bar, three large hero scenes,
-  ten vignettes in two rows of five, a dotted world map with numbered pins at the
-  bottom, briefs numbered 14–40, and a date-check footer listing what was
-  deliberately left out because it happened on another day.
-- `render.py` — draws `entry.png` with PIL only. No network, no randomness, no
-  external assets: run it twice and the bytes are identical.
-- `main.ts` — the program the harness runs. It copies `entry.png` byte-identical
-  to `/output/entry.png` (or `$MAKEFUN_OUTPUT_DIR/entry.png` locally).
-
-## Build it
+- `render.html` is the whole 1024×1024 front page (inline CSS + SVG
+  illustrations + a small script that draws the dotted world map and pins
+  from the stories' coordinates).
+- `render.mjs` screenshots it with Playwright (Chromium) to `entry.png`.
+- `main.ts` (Node 22, standard library only) copies `entry.png` to the
+  output directory. That is the entry the judge sees.
+- `stories_20261121.json` is the verified dataset behind the page: all 36
+  stories, dated Saturday 21 November 2026, with region, dateline, source,
+  and coordinates for the illustrated stories.
 
 ```sh
-python3 render.py            # writes entry.png (deterministic)
-mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
-cmp entry.png out/entry.png  # byte-identical
+node render.mjs          # render.html -> entry.png (1024x1024)
+mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts   # -> out/entry.png
 ```
 
 ## Sources
 
-Every story is sourced and dated in `NEWS-RESEARCH.md` (in the work directory,
-not shipped here): Reuters, AP, AFP, ESA, BBC, Kyiv Independent, PIB, ATP and
-others, all 21 November 2026. Confidence is marked per story (Officials say /
-Reported / Ongoing / Estimate). The date-check footer names the Friday and
-Thursday stories that were left out on purpose — the Poland missile landings,
-Kyiv's bridges, Cyclone Akvan's landfall, Bayer's $7.25bn settlement,
-Anthropic's $81.3bn IPO, and more.
-
-## Bounty
-
-- Competition: [news-image-20261121 — Sum up 21 November's world news in one image](https://make.fun/c/news-image-20261121)
-- Pot: $100 — 1st $20, 2nd $12, 3rd $6, 4th–10th $2, 11th–50th $1.20
-- Deadline: 23 November 2026, 07:00 WIB
-- Entrant: [@dizellacapital](https://make.fun/r/qxacafna) — referral code `qxacafna`
-
-## License
-
-MIT — see `LICENSE`.
+All 36 stories verified 21 November 2026 via live web search: Reuters, AP,
+AFP, USGS, ESA, CAAP, Kyiv Independent, BBC, PIB, Asahi, FIA/F1,
+CoinGecko, Islamic Relief, UN News.
